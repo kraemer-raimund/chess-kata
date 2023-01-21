@@ -1,5 +1,7 @@
 package org.chess.presentation.rendering.console;
 
+import org.chess.domain.GameState;
+
 public class ConsoleBoardRenderer {
 
     private static final String EMPTY_BOARD = """
@@ -26,7 +28,7 @@ public class ConsoleBoardRenderer {
 
     private final char[] renderBuffer = new char[EMPTY_BOARD.length()];
 
-    public String renderBoard(Board board) {
+    public String render(GameState gameState) {
         renderEmptyBoard();
 
         return new String(renderBuffer);

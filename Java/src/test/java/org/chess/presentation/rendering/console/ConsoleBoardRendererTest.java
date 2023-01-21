@@ -1,5 +1,6 @@
 package org.chess.presentation.rendering.console;
 
+import org.chess.domain.GameState;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -9,9 +10,9 @@ class ConsoleBoardRendererTest {
     @Test
     void shouldRenderEmptyBoard() {
         final var renderer = new ConsoleBoardRenderer();
-        final var board = new Board();
+        final var gameState = GameState.initialState();
 
-        var actual = renderer.renderBoard(board);
+        var actual = renderer.render(gameState);
         var expected = """
                                    
                      ╔═════╦═════╦═════╦═════╦═════╦═════╦═════╦═════╗
