@@ -1,4 +1,4 @@
-package org.chess.presentation.rendering.console;
+package org.chess.rendering;
 
 import org.chess.domain.GameState;
 import org.junit.jupiter.api.Test;
