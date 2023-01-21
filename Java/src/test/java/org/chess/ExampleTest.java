@@ -1,4 +1,4 @@
-package org.example;
+package org.chess;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

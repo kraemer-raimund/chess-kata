@@ -1,4 +1,4 @@
-package org.example;
+package org.chess;
 
 public class Main {
 
