@@ -1,7 +1,10 @@
 package org.chess;
 
 import org.chess.domain.GameState;
+import org.chess.domain.Move;
+import org.chess.input.MoveCommandParser;
 import org.chess.rendering.ConsoleRenderer;
+import org.chess.ruleengine.RuleEngine;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,6 +13,8 @@ import java.io.InputStreamReader;
 public class Engine {
 
     private final ConsoleRenderer renderer = new ConsoleRenderer();
+    private final MoveCommandParser moveCommandParser = new MoveCommandParser();
+    private final RuleEngine ruleEngine = new RuleEngine();
 
     private boolean running = false;
 
@@ -55,9 +60,9 @@ public class Engine {
     }
 
     private GameState handlePlayerInput(String playerInput, GameState gameState) {
-        // For now, we do not transform the game state. The game state will remain the same for
-        // any player input. Later we will parse the player input and transform the game state
-        // according to the rules of chess.
-        return gameState;
+        final Move move = moveCommandParser.parse(playerInput);
+        return ruleEngine
+                .execute(move, gameState)
+                .gameState();
     }
 }
