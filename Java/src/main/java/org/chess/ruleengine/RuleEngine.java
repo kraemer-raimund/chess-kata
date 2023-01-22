@@ -6,6 +6,7 @@ import org.chess.domain.PlayerColor;
 import org.chess.domain.RuleViolation;
 import org.chess.domain.rules.Rule;
 import org.chess.domain.rules.SourcePositionMustNotBeEmpty;
+import org.chess.domain.rules.TargetPositionMustNotBeOccupiedByAlly;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -15,7 +16,8 @@ import java.util.Optional;
 public class RuleEngine {
 
     private final List<Rule> rules = List.of(
-            new SourcePositionMustNotBeEmpty()
+            new SourcePositionMustNotBeEmpty(),
+            new TargetPositionMustNotBeOccupiedByAlly()
     );
 
     public MoveResult execute(Move move, GameState gameState) {
