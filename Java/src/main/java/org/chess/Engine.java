@@ -2,6 +2,7 @@ package org.chess;
 
 import org.chess.domain.GameState;
 import org.chess.domain.Move;
+import org.chess.domain.PlayerColor;
 import org.chess.input.MoveCommandParser;
 import org.chess.rendering.ConsoleRenderer;
 import org.chess.ruleengine.RuleEngine;
@@ -29,7 +30,7 @@ public class Engine {
         GameState gameState = initialState;
         while (running) {
             renderToScreen(gameState);
-            promptPlayerInput();
+            promptPlayerInput(gameState);
             final String playerInput = readPlayerInput(reader);
             gameState = handlePlayerInput(playerInput, gameState);
         }
@@ -39,8 +40,17 @@ public class Engine {
         System.out.println(renderer.render(gameState));
     }
 
-    private void promptPlayerInput() {
+    private void promptPlayerInput(GameState gameState) {
+        final String playerName = toPlayerName(gameState.currentPlayer());
+        System.out.printf("%s's turn.\n", playerName);
         System.out.println("Type your move in the format \"from -> to\", e.g., \"e2 -> e8\".");
+    }
+
+    private String toPlayerName(PlayerColor playerColor) {
+        return switch (playerColor) {
+            case WHITE -> "White";
+            case BLACK -> "Black";
+        };
     }
 
     private String readPlayerInput(BufferedReader reader) {
