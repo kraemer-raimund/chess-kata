@@ -5,7 +5,7 @@ import org.chess.domain.GameState;
 import org.chess.domain.PlayerColor;
 import org.chess.domain.Position;
 
-public class ConsoleBoardRenderer {
+public class ConsoleRenderer {
 
     private static final String EMPTY_BOARD = """
                         

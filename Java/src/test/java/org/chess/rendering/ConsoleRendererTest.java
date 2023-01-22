@@ -7,11 +7,11 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ConsoleBoardRendererTest {
+class ConsoleRendererTest {
 
     @Test
     void shouldRenderEmptyBoard() {
-        final var renderer = new ConsoleBoardRenderer();
+        final var renderer = new ConsoleRenderer();
         final var gameState = new GameState(Map.of());
 
         var actual = renderer.render(gameState);
@@ -42,7 +42,7 @@ class ConsoleBoardRendererTest {
 
     @Test
     void shouldRenderInitialPositions() {
-        final var renderer = new ConsoleBoardRenderer();
+        final var renderer = new ConsoleRenderer();
         final var gameState = GameState.initialState();
 
         var actual = renderer.render(gameState);
