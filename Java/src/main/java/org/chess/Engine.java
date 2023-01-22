@@ -28,16 +28,11 @@ public class Engine {
     private void gameLoop(GameState initialState, BufferedReader reader) {
         GameState gameState = initialState;
         while (running) {
-            clearScreen();
             renderToScreen(gameState);
             promptPlayerInput();
             final String playerInput = readPlayerInput(reader);
             gameState = handlePlayerInput(playerInput, gameState);
         }
-    }
-
-    private void clearScreen() {
-        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
 
     private void renderToScreen(GameState gameState) {
@@ -60,9 +55,21 @@ public class Engine {
     }
 
     private GameState handlePlayerInput(String playerInput, GameState gameState) {
-        final Move move = moveCommandParser.parse(playerInput);
-        return ruleEngine
-                .execute(move, gameState)
-                .gameState();
+        final Move move;
+
+        try {
+            move = moveCommandParser.parse(playerInput);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Please make sure your command is in the correct format.");
+            return gameState;
+        }
+
+        final var moveResult = ruleEngine.execute(move, gameState);
+        if (!moveResult.violations().isEmpty()) {
+            System.out.println("Invalid move!");
+            return gameState;
+        }
+
+        return moveResult.gameState();
     }
 }
