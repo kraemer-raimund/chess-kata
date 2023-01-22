@@ -42,9 +42,19 @@ Basic movement of the chess pieces on the board is already implemented. Now we w
 1. [The queen ♛ can move](https://en.wikipedia.org/wiki/Queen_(chess)#Placement_and_movement) straight and diagonally in any direction until it is blocked by another piece.
    <details>
    <summary>Hint</summary>
-   At this point, you might be tempted to reuse some code from the bishop's and the rook's movement patterns; possibly even make use of inheritance for code reuse. Carefully weigh the trade-off between coupling and reusing a few lines of otherwise independent, conceptually unrelated, relatively simple, and unit-tested code. Often it is worth it having similar pieces of code that do not depend on each other and are independently unit tested. There is an important difference between duplication of code that does and means the same, and code that works similarly but is conceptually different.
+   At this point, you might be tempted to reuse some code from the bishop's and the rook's movement patterns; possibly even make use of inheritance for code reuse. Carefully weigh the trade-off between coupling and reusing a few lines of code that are otherwise independent, conceptually unrelated, relatively simple, and unit-tested. Often it is worth it having similar pieces of code that do not depend on each other and are independently unit tested. There is an important difference between duplication of code that does and means the same, and code that works similarly but is conceptually different.
    
    Otherwise, where do we stop? "The queen moves like the rook and the bishop combined. But the rook moves like the king, only repeated. The king moves like the pawn, but in every direction. The knight moves like the pawn in its first move, but in every direction, followed by a move of the king, but to the side."
+
+   Further reading:
+   [[1](https://softwareengineering.stackexchange.com/a/300061/195641)]
+   [[2](https://verraes.net/2014/08/dry-is-about-knowledge/)]
+   [[3](https://blog.ploeh.dk/2014/08/07/why-dry/)]
+   [[4](https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction)]
+   [[5](https://www.deconstructconf.com/2019/dan-abramov-the-wet-codebase)]
+   [[6](https://www.goodreads.com/quotes/9579416-but-there-are-different-kinds-of-duplication-there-is-true)]
+   [[7](https://anthonysciamanna.com/2018/07/28/the-dry-principle-and-incidental-duplication.html)]
+   [[8](https://www.justsoftwaresolutions.co.uk/design/duplication.html)]
    </details>
 
 ## Optional more challenging features
