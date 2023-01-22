@@ -2,6 +2,7 @@ package org.chess.ruleengine;
 
 import org.chess.domain.GameState;
 import org.chess.domain.Move;
+import org.chess.domain.PlayerColor;
 import org.chess.domain.RuleViolation;
 import org.chess.domain.rules.Rule;
 import org.chess.domain.rules.SourcePositionMustNotBeEmpty;
@@ -37,9 +38,18 @@ public class RuleEngine {
 
     private GameState movePiece(Move move, GameState gameState) {
         var chessPiecePositions = new HashMap<>(gameState.chessPiecePositions());
+
         var chessPiece = chessPiecePositions.get(move.from());
         chessPiecePositions.remove(move.from());
         chessPiecePositions.put(move.to(), chessPiece);
-        return new GameState(chessPiecePositions);
+
+        return new GameState(
+                chessPiecePositions, nextPlayer(gameState.currentPlayer()));
+    }
+
+    private PlayerColor nextPlayer(PlayerColor currentPlayer) {
+        return currentPlayer == PlayerColor.WHITE
+                ? PlayerColor.BLACK
+                : PlayerColor.WHITE;
     }
 }

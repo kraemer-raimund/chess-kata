@@ -4,10 +4,14 @@ import java.util.Map;
 
 import static java.util.Map.entry;
 
-public record GameState(Map<Position, ChessPiece> chessPiecePositions) {
+public record GameState(Map<Position, ChessPiece> chessPiecePositions, PlayerColor currentPlayer) {
+
+    public GameState(Map<Position, ChessPiece> chessPiecePositions) {
+        this(chessPiecePositions, PlayerColor.WHITE);
+    }
 
     public static GameState initialState() {
-        return new GameState(initialPositions());
+        return new GameState(initialPositions(), PlayerColor.WHITE);
     }
 
     private static Map<Position, ChessPiece> initialPositions() {
