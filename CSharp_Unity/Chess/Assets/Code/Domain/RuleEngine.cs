@@ -1,23 +1,30 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ChessKata.Domain.Rules;
 
 namespace ChessKata.Domain
 {
     public class RuleEngine
     {
+        private readonly IEnumerable<IRule> _rules = new List<IRule>()
+        {
+            new SourcePositionMustNotBeEmpty()
+        };
+
         public RuleEngine()
         {
         }
 
         public MoveResult Execute(Move move, GameState gameState)
         {
-            if (!gameState.ChessPiecesByPosition.ContainsKey(move.From))
-            {
-                var ruleViolations = new List<RuleViolation> { RuleViolation.NoPieceAtSourcePosition };
-                return new(ruleViolations, gameState);
-            }
+            IEnumerable<RuleViolation> ruleViolations = _rules
+                .Select(rule => rule.Execute(move, gameState))
+                .Where(ruleViolationOrNull => ruleViolationOrNull.HasValue)
+                .Select(ruleViolation => ruleViolation.Value);
 
-            return new(Enumerable.Empty<RuleViolation>(), gameState);
+            return ruleViolations.Any()
+                ? new(ruleViolations, gameState)
+                : new(Enumerable.Empty<RuleViolation>(), gameState);
         }
     }
 }
