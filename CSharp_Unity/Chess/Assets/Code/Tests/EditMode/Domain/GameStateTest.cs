@@ -1,18 +1,18 @@
 using System.Collections.Generic;
+using System.Linq;
+using ChessKata.Domain;
+using NUnit.Framework;
 
-namespace ChessKata.Domain
+namespace ChessKata.Tests
 {
-    public class GameState
+    internal class GameStateTest
     {
-        public GameState()
+        [Test]
+        public void InitialState_ShouldCorrectlyPlaceChessPieces()
         {
-            ChessPiecesByPosition = InitialPositions;
-        }
+            IReadOnlyDictionary<Position, ChessPiece> actual = new GameState().ChessPiecesByPosition;
 
-        public IReadOnlyDictionary<Position, ChessPiece> ChessPiecesByPosition { get; }
-
-        private static Dictionary<Position, ChessPiece> InitialPositions { get; }
-            = new Dictionary<Position, ChessPiece>()
+            IReadOnlyDictionary<Position, ChessPiece> expected = new Dictionary<Position, ChessPiece>()
             {
                 [new Position(1, 1)] = new ChessPiece(ChessPieceName.Rook, PlayerColor.White),
                 [new Position(2, 1)] = new ChessPiece(ChessPieceName.Knight, PlayerColor.White),
@@ -50,5 +50,8 @@ namespace ChessKata.Domain
                 [new Position(7, 8)] = new ChessPiece(ChessPieceName.Knight, PlayerColor.Black),
                 [new Position(8, 8)] = new ChessPiece(ChessPieceName.Rook, PlayerColor.Black)
             };
+
+            CollectionAssert.AreEqual(expected, actual);
+        }
     }
 }
