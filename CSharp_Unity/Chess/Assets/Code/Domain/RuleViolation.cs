@@ -2,6 +2,7 @@
 {
     public enum RuleViolation
     {
-        NoPieceAtSourcePosition
+        NoPieceAtSourcePosition,
+        TargetPositionOccupiedByAlly
     }
 }
