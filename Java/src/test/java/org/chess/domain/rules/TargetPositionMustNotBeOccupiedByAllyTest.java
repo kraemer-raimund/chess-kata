@@ -29,7 +29,7 @@ class TargetPositionMustNotBeOccupiedByAllyTest {
     }
 
     @Test
-    void shouldRejectMoveToEmptyPosition() {
+    void shouldNotRejectMoveToEmptyPosition() {
         final var positionFrom = new Position(3, 3);
         final var positionTo = new Position(4, 4);
         final var whiteBishopToMove = new ChessPiece(ChessPieceName.BISHOP, PlayerColor.WHITE);
