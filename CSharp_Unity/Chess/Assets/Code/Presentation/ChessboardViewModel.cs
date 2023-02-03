@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ChessKata.Presentation
 {
-    internal class ChessboardPresenter : MonoBehaviour
+    internal class ChessboardViewModel : MonoBehaviour
     {
         [SerializeField] private Squares _squares;
         [SerializeField] private ChessPieces _chessPieces;
