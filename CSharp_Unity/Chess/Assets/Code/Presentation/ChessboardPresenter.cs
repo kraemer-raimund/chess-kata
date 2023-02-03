@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using ChessKata.Domain;
@@ -6,24 +5,12 @@ using UnityEngine;
 
 namespace ChessKata.Presentation
 {
-    public class ChessboardPresenter : MonoBehaviour
+    internal class ChessboardPresenter : MonoBehaviour
     {
+        [SerializeField] private ChessPiecePrefabs _chessPiecePrefabs;
+
         [SerializeField] private GameObject _whiteSquarePrefab;
         [SerializeField] private GameObject _blackSquarePrefab;
-
-        [SerializeField] private GameObject _whitePawn;
-        [SerializeField] private GameObject _whiteRook;
-        [SerializeField] private GameObject _whiteKnight;
-        [SerializeField] private GameObject _whiteBishop;
-        [SerializeField] private GameObject _whiteQueen;
-        [SerializeField] private GameObject _whiteKing;
-
-        [SerializeField] private GameObject _blackPawn;
-        [SerializeField] private GameObject _blackRook;
-        [SerializeField] private GameObject _blackKnight;
-        [SerializeField] private GameObject _blackBishop;
-        [SerializeField] private GameObject _blackQueen;
-        [SerializeField] private GameObject _blackKing;
 
         private readonly GameState _gameState = new();
 
@@ -74,27 +61,14 @@ namespace ChessKata.Presentation
 
         private void PlaceNewChessPiece(ChessPiece chessPiece, Position position)
         {
-            GameObject chessPieceGameObject = Instantiate(ToChessPiecePrefab(chessPiece));
+            GameObject prefab = _chessPiecePrefabs.GetPrefabFor(chessPiece);
+            GameObject chessPieceGameObject = Instantiate(prefab);
             chessPieceGameObject.transform.position = ToWorldPosition(position);
             if (chessPiece.Color == PlayerColor.Black)
             {
                 chessPieceGameObject.transform.Rotate(new(0, 180, 0));
             }
             _chessPiecesByPosition.Add(position, chessPieceGameObject.transform);
-        }
-
-        private GameObject ToChessPiecePrefab(ChessPiece chessPiece)
-        {
-            return chessPiece.Name switch
-            {
-                ChessPieceName.Pawn => chessPiece.Color == PlayerColor.White ? _whitePawn : _blackPawn,
-                ChessPieceName.Rook => chessPiece.Color == PlayerColor.White ? _whiteRook : _blackRook,
-                ChessPieceName.Knight => chessPiece.Color == PlayerColor.White ? _whiteKnight : _blackKnight,
-                ChessPieceName.Bishop => chessPiece.Color == PlayerColor.White ? _whiteBishop : _blackBishop,
-                ChessPieceName.Queen => chessPiece.Color == PlayerColor.White ? _whiteQueen : _blackQueen,
-                ChessPieceName.King => chessPiece.Color == PlayerColor.White ? _whiteKing : _blackKing,
-                _ => throw new ArgumentException()
-            };
         }
 
         private Vector3 ToWorldPosition(Position positionOnChessboard)
