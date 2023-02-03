@@ -5148,6 +5148,7 @@ GameObject:
   - component: {fileID: 1692168420}
   - component: {fileID: 1692168426}
   - component: {fileID: 1692168425}
+  - component: {fileID: 1692168427}
   - component: {fileID: 1692168423}
   - component: {fileID: 1692168424}
   - component: {fileID: 1692168422}
@@ -5236,9 +5237,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37abb458be83f4e4f8fa2b9b0963ccc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _viewModel: {fileID: 1692168426}
   _squares: {fileID: 1692168423}
   _chessPieces: {fileID: 1692168424}
-  _viewModel: {fileID: 1692168426}
+  _playerInput: {fileID: 1692168427}
 --- !u!114 &1692168426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5251,3 +5253,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d92986bef808b0f45be7109c78667358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1692168427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692168419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfb363d7ad2ec584a8f76a91cead85bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _camera: {fileID: 963194227}
