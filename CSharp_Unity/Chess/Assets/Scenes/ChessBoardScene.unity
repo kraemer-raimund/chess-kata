@@ -5147,8 +5147,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1692168420}
   - component: {fileID: 1692168421}
-  - component: {fileID: 1692168422}
   - component: {fileID: 1692168423}
+  - component: {fileID: 1692168424}
+  - component: {fileID: 1692168422}
   m_Layer: 0
   m_Name: Chessboard
   m_TagString: Untagged
@@ -5183,8 +5184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d92986bef808b0f45be7109c78667358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _chessPiecePrefabs: {fileID: 1692168422}
   _squares: {fileID: 1692168423}
+  _chessPieces: {fileID: 1692168424}
 --- !u!114 &1692168422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5223,3 +5224,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _whiteSquarePrefab: {fileID: 1230231202405246636, guid: 7a2630651a4429847be5f8080510159d, type: 3}
   _blackSquarePrefab: {fileID: 3395169613522388359, guid: 465e156df55d67246935fd9838d3c122, type: 3}
+--- !u!114 &1692168424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692168419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8da3047e4f0224744a8eb0033b972313, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _chessPiecePrefabs: {fileID: 1692168422}
