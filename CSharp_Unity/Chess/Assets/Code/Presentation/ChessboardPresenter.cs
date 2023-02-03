@@ -9,8 +9,7 @@ namespace ChessKata.Presentation
     {
         [SerializeField] private ChessPiecePrefabs _chessPiecePrefabs;
 
-        [SerializeField] private GameObject _whiteSquarePrefab;
-        [SerializeField] private GameObject _blackSquarePrefab;
+        [SerializeField] private Squares _squares;
 
         private readonly GameState _gameState = new();
 
@@ -19,27 +18,8 @@ namespace ChessKata.Presentation
 
         private IEnumerator Start()
         {
-            yield return InitializeSquares();
+            yield return _squares.Initialize(positionToWorldMapping: ToWorldPosition);
             yield return InitializeChessPieces();
-        }
-
-        private IEnumerator InitializeSquares()
-        {
-            for (int row = 1; row <= 8; row++)
-            {
-                yield return new WaitForSeconds(0.08f);
-
-                for (int col = 1; col <= 8; col++)
-                {
-                    bool isOddColumn = col % 2 == 1;
-                    bool isOddRow = row % 2 == 1;
-                    bool isBlackSquare = isOddRow == isOddColumn;
-
-                    GameObject squarePrefab = isBlackSquare ? _blackSquarePrefab : _whiteSquarePrefab;
-                    GameObject square = Instantiate(squarePrefab);
-                    square.transform.position = ToWorldPosition(new Position(col, row));
-                }
-            }
         }
 
         private IEnumerator InitializeChessPieces()
