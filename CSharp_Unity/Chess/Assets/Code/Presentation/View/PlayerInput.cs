@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace ChessKata.Presentation
 {
-    public class PlayerInput : MonoBehaviour
+    internal class PlayerInput : MonoBehaviour
     {
         [SerializeField] private Camera _camera;
 
-        public event EventHandler<GameObject> ClickedObject;
+        public event Action<GameObject> ClickedObject;
 
         private void Update()
         {
@@ -20,7 +20,7 @@ namespace ChessKata.Presentation
                     ? hitInfo.transform.gameObject
                     : null;
 
-                ClickedObject?.Invoke(this, clickedObject);
+                ClickedObject?.Invoke(clickedObject);
             }
         }
     }
