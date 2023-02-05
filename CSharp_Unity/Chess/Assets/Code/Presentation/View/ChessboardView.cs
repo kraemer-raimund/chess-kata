@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using ChessKata.Domain;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ namespace ChessKata.Presentation
         private IEnumerator Start()
         {
             _viewModel.SelectedPositionChanged += HandleSelectionChanged;
+            _viewModel.PositionsChanged += HandlePositionsChanged;
 
             _playerInput.enabled = false;
 
@@ -23,16 +25,6 @@ namespace ChessKata.Presentation
 
             _playerInput.ClickedObject += HandlePlayerClickedObject;
             _playerInput.enabled = true;
-        }
-
-        private void HandlePlayerClickedObject(GameObject clickedObject)
-        {
-            Position? clickedPositionOrNull = _squares.ClickedPositionOrNull(clickedObject);
-            
-            if (clickedPositionOrNull != null)
-            {
-                _viewModel.OnClickedPosition(clickedPositionOrNull.Value);
-            }
         }
 
         private void HandleSelectionChanged(Position? selectedPosition)
@@ -44,6 +36,21 @@ namespace ChessKata.Presentation
             else
             {
                 _selectionEffect.OnUnselectChesspiece();
+            }
+        }
+
+        private void HandlePositionsChanged(IReadOnlyDictionary<Position, ChessPiece> chessPiecesByPosition)
+        {
+            _chessPieces.UpdateChessPieces(chessPiecesByPosition, ToWorldPosition);
+        }
+
+        private void HandlePlayerClickedObject(GameObject clickedObject)
+        {
+            Position? clickedPositionOrNull = _squares.ClickedPositionOrNull(clickedObject);
+
+            if (clickedPositionOrNull != null)
+            {
+                _viewModel.OnClickedPosition(clickedPositionOrNull.Value);
             }
         }
 

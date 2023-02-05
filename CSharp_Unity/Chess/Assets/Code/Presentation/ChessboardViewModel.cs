@@ -13,8 +13,9 @@ namespace ChessKata.Presentation
         private Position? _selectedPosition;
 
         public event Action<Position?> SelectedPositionChanged;
+        public event Action<IReadOnlyDictionary<Position, ChessPiece>> PositionsChanged;
 
-        public IReadOnlyDictionary<Position, ChessPiece> ChessPiecesByPosition => _gameState.ChessPiecesByPosition;
+        public IReadOnlyDictionary<Position, ChessPiece> ChessPiecesByPosition => GameState.ChessPiecesByPosition;
 
         public Position? SelectedPosition
         {
@@ -23,6 +24,16 @@ namespace ChessKata.Presentation
             {
                 _selectedPosition = value;
                 SelectedPositionChanged?.Invoke(_selectedPosition);
+            }
+        }
+
+        private GameState GameState
+        {
+            get => _gameState;
+            set
+            {
+                _gameState = value;
+                PositionsChanged?.Invoke(ChessPiecesByPosition);
             }
         }
 
@@ -35,7 +46,7 @@ namespace ChessKata.Presentation
             else if (IsSomethingSelected() && !IsPositionOccupiedByCurrentPlayer(clickedPosition))
             {
                 Move move = new(SelectedPosition.Value, clickedPosition);
-                MoveResult moveResult = _ruleEngine.Execute(move, _gameState);
+                MoveResult moveResult = _ruleEngine.Execute(move, GameState);
                 HandleMoveResult(moveResult);
             }
         }
@@ -48,21 +59,22 @@ namespace ChessKata.Presentation
             }
             else
             {
-                _gameState = moveResult.GameState;
+                SelectedPosition = null;
+                GameState = moveResult.GameState;
             }
         }
 
-        private bool IsSomethingSelected() => _selectedPosition.HasValue;
+        private bool IsSomethingSelected() => SelectedPosition.HasValue;
 
         private bool IsPositionOccupiedByCurrentPlayer(Position position)
         {
-            if (!_gameState.ChessPiecesByPosition.ContainsKey(position))
+            if (!GameState.ChessPiecesByPosition.ContainsKey(position))
             {
                 return false;
             }
 
-            ChessPiece chessPiece = _gameState.ChessPiecesByPosition[position];
-            PlayerColor currentPlayer = _gameState.CurrentPlayer;
+            ChessPiece chessPiece = GameState.ChessPiecesByPosition[position];
+            PlayerColor currentPlayer = GameState.CurrentPlayer;
 
             return chessPiece.Color == currentPlayer;
         }

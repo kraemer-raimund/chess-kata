@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ChessKata.Presentation
 {
-    public class ChessPieces : MonoBehaviour
+    internal class ChessPieces : MonoBehaviour
     {
         [SerializeField] private ChessPiecePrefabs _chessPiecePrefabs;
 
@@ -30,6 +30,38 @@ namespace ChessKata.Presentation
                         PlaceNewChessPiece(chessPiece, position, positionToWorldMapping);
                     }
                 }
+            }
+        }
+
+        public void UpdateChessPieces(
+            IReadOnlyDictionary<Position, ChessPiece> newChessPiecePositions,
+            Func<Position, Vector3> positionToWorldMapping
+        )
+        {
+            ClearChessPieces();
+            PlaceChessPieces(newChessPiecePositions, positionToWorldMapping);
+        }
+
+        private void ClearChessPieces()
+        {
+            foreach (Transform piece in _chessPiecesByPosition.Values)
+            {
+                Destroy(piece.gameObject);
+            }
+
+            _chessPiecesByPosition.Clear();
+        }
+
+        private void PlaceChessPieces(
+            IReadOnlyDictionary<Position, ChessPiece> chessPiecePositions,
+            Func<Position, Vector3> positionToWorldMapping
+        )
+        {
+            foreach (KeyValuePair<Position, ChessPiece> entry in chessPiecePositions)
+            {
+                Position position = entry.Key;
+                ChessPiece chessPiece = entry.Value;
+                PlaceNewChessPiece(chessPiece, position, positionToWorldMapping);
             }
         }
 
