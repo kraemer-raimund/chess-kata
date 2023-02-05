@@ -16,6 +16,8 @@ namespace ChessKata.Domain
 
         public IReadOnlyDictionary<Position, ChessPiece> ChessPiecesByPosition { get; }
 
+        public PlayerColor CurrentPlayer { get; } = PlayerColor.White;
+
         private static Dictionary<Position, ChessPiece> InitialPositions { get; }
             = new Dictionary<Position, ChessPiece>()
             {
