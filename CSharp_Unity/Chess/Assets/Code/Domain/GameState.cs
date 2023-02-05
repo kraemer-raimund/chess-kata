@@ -14,6 +14,12 @@ namespace ChessKata.Domain
             ChessPiecesByPosition = chessPiecesByPosition;
         }
 
+        public GameState(IReadOnlyDictionary<Position, ChessPiece> chessPiecesByPosition, PlayerColor currentPlayer)
+        {
+            ChessPiecesByPosition = chessPiecesByPosition;
+            CurrentPlayer = currentPlayer;
+        }
+
         public IReadOnlyDictionary<Position, ChessPiece> ChessPiecesByPosition { get; }
 
         public PlayerColor CurrentPlayer { get; } = PlayerColor.White;
