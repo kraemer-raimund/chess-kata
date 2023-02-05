@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using ChessKata.Domain;
 using NUnit.Framework;
 
@@ -23,6 +24,33 @@ namespace ChessKata.Tests
 
             Assert.IsNotEmpty(moveResult.Violations);
             Assert.AreEqual(gameStateBefore, moveResult.GameState);
+        }
+
+        [Test]
+        public void ShouldMoveChessPieceIfMoveIsValid()
+        {
+            ChessPiece whitePawn = new(ChessPieceName.Pawn, PlayerColor.White);
+            Position positionBefore = new(1, 2);
+            Position positionAfter = new(1, 3);
+
+            GameState gameStateBefore = new(
+                new Dictionary<Position, ChessPiece>() {
+                    [positionBefore] = whitePawn
+                }
+            );
+            Move move = new(positionBefore, positionAfter);
+
+            RuleEngine ruleEngine = new();
+            MoveResult moveResult = ruleEngine.Execute(move, gameStateBefore);
+
+            Assert.IsEmpty(moveResult.Violations);
+
+            Assert.IsTrue(moveResult.GameState.ChessPiecesByPosition.ContainsKey(positionAfter));
+            Assert.IsFalse(moveResult.GameState.ChessPiecesByPosition.ContainsKey(positionBefore));
+
+            ChessPiece chessPieceAfter = moveResult.GameState.ChessPiecesByPosition[positionAfter];
+            ChessPiece chessPieceBefore = gameStateBefore.ChessPiecesByPosition[positionBefore];
+            Assert.AreEqual(chessPieceBefore, chessPieceAfter);
         }
     }
 }

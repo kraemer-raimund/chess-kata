@@ -8,7 +8,8 @@ namespace ChessKata.Domain
     {
         private readonly IEnumerable<IRule> _rules = new List<IRule>()
         {
-            new SourcePositionMustNotBeEmpty()
+            new SourcePositionMustNotBeEmpty(),
+            new TargetPositionMustNotBeOccupiedByAlly(),
         };
 
         public RuleEngine()
@@ -22,9 +23,29 @@ namespace ChessKata.Domain
                 .Where(ruleViolationOrNull => ruleViolationOrNull.HasValue)
                 .Select(ruleViolation => ruleViolation.Value);
 
-            return ruleViolations.Any()
-                ? new(ruleViolations, gameState)
-                : new(Enumerable.Empty<RuleViolation>(), gameState);
+            if (ruleViolations.Any())
+            {
+                return new(ruleViolations, gameState);
+            }
+            else
+            {
+                GameState newGameState = MovePiece(move, gameState);
+                return new(Enumerable.Empty<RuleViolation>(), newGameState);
+            }
+        }
+
+        private GameState MovePiece(Move move, GameState gameState)
+        {
+            var newPositions = new Dictionary<Position, ChessPiece>(gameState.ChessPiecesByPosition);
+            
+            ChessPiece chessPiece = newPositions[move.From];
+            _ = newPositions.Remove(move.From);
+            if (!newPositions.TryAdd(move.To, chessPiece))
+            {
+                newPositions[move.To] = chessPiece;
+            }
+
+            return new GameState(newPositions);
         }
     }
 }
