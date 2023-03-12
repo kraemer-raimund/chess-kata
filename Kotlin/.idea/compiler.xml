@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Java" />
+        <module name="Kotlin" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Java" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
