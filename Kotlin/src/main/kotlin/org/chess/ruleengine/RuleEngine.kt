@@ -25,11 +25,7 @@ class RuleEngine {
     }
 
     private fun applyRules(move: Move, gameState: GameState): Collection<RuleViolation> {
-        val ruleViolations = rules
-            .map { it.execute(move, gameState) }
-            .filter { it.isPresent }
-            .map { obj: Optional<RuleViolation> -> obj.get() }
-        return ruleViolations.toList()
+        return rules.mapNotNull { it.execute(move, gameState) }
     }
 
     private fun movePiece(move: Move, gameState: GameState): GameState {

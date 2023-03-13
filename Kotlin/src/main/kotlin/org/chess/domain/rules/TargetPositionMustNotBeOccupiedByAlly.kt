@@ -7,15 +7,15 @@ import java.util.*
 
 class TargetPositionMustNotBeOccupiedByAlly : Rule {
 
-    override fun execute(move: Move, gameState: GameState): Optional<RuleViolation> {
+    override fun execute(move: Move, gameState: GameState): RuleViolation? {
         val chessPieceAtTargetPosition = gameState
             .chessPiecePositions
             .getOrDefault(move.to, null)
 
         if (chessPieceAtTargetPosition != null && chessPieceAtTargetPosition.color === gameState.currentPlayer) {
-            return Optional.of(RuleViolation.TARGET_POSITION_OCCUPIED_BY_ALLY)
+            return RuleViolation.TARGET_POSITION_OCCUPIED_BY_ALLY
         }
 
-        return Optional.empty()
+        return null
     }
 }

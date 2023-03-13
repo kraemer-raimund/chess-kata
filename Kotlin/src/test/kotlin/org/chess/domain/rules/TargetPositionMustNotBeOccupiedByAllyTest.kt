@@ -1,6 +1,6 @@
 package org.chess.domain.rules
 
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.*
 import org.chess.domain.*
 import org.junit.jupiter.api.Test
 
@@ -23,8 +23,7 @@ internal class TargetPositionMustNotBeOccupiedByAllyTest {
         val rule = TargetPositionMustNotBeOccupiedByAlly()
         val ruleViolation = rule.execute(move, gameState)
 
-        Assertions.assertThat(ruleViolation).isPresent
-        Assertions.assertThat(ruleViolation.get()).isEqualTo(RuleViolation.TARGET_POSITION_OCCUPIED_BY_ALLY)
+        assertThat(ruleViolation).isEqualTo(RuleViolation.TARGET_POSITION_OCCUPIED_BY_ALLY)
     }
 
     @Test
@@ -42,6 +41,6 @@ internal class TargetPositionMustNotBeOccupiedByAllyTest {
         val rule = TargetPositionMustNotBeOccupiedByAlly()
         val ruleViolation = rule.execute(move, gameState)
 
-        Assertions.assertThat(ruleViolation).isNotPresent
+        assertThat(ruleViolation).isNull()
     }
 }

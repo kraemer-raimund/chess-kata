@@ -1,6 +1,6 @@
 package org.chess.domain.rules
 
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.*
 import org.chess.domain.*
 import org.junit.jupiter.api.Test
 
@@ -15,8 +15,7 @@ internal class SourcePositionMustNotBeEmptyTest {
         val move = Move(Position(0, 0), Position(0, 0))
         val ruleViolation = rule.execute(move, gameState)
 
-        Assertions.assertThat(ruleViolation).isPresent
-        Assertions.assertThat(ruleViolation.get()).isEqualTo(RuleViolation.NO_PIECE_AT_SOURCE_POSITION)
+        assertThat(ruleViolation).isEqualTo(RuleViolation.NO_PIECE_AT_SOURCE_POSITION)
     }
 
     @Test
@@ -31,6 +30,6 @@ internal class SourcePositionMustNotBeEmptyTest {
         val move = Move(Position(0, 1), Position(0, 5))
         val ruleViolation = rule.execute(move, gameState)
 
-        Assertions.assertThat(ruleViolation).isNotPresent
+        assertThat(ruleViolation).isNull()
     }
 }
