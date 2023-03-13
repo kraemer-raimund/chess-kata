@@ -33,12 +33,12 @@ class RuleEngine {
     }
 
     private fun movePiece(move: Move, gameState: GameState): GameState {
-        val chessPiecePositions = HashMap(gameState.chessPiecePositions())
-        val chessPiece = chessPiecePositions[move.from()]
-        chessPiecePositions.remove(move.from())
-        chessPiecePositions[move.to()] = chessPiece
+        val chessPiecePositions = HashMap(gameState.chessPiecePositions)
+        val chessPiece = chessPiecePositions[move.from]
+        chessPiecePositions.remove(move.from)
+        chessPiecePositions[move.to] = chessPiece
         return GameState(
-            chessPiecePositions, nextPlayer(gameState.currentPlayer())
+            chessPiecePositions, nextPlayer(gameState.currentPlayer)
         )
     }
 

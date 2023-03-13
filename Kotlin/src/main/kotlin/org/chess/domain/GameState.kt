@@ -4,11 +4,6 @@ data class GameState(val chessPiecePositions: Map<Position, ChessPiece>, val cur
 
     constructor(chessPiecePositions: Map<Position, ChessPiece>) : this(chessPiecePositions, PlayerColor.WHITE)
 
-    // Temporary backwards compatibility for usages from Java code that expect
-    // an implicit get method from a Java record.
-    fun chessPiecePositions() = chessPiecePositions
-    fun currentPlayer() = currentPlayer
-
     companion object {
         fun initialState(): GameState {
             return GameState(initialPositions(), PlayerColor.WHITE)

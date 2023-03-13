@@ -18,7 +18,7 @@ class ConsoleRenderer {
 
     private fun renderChessPieces(gameState: GameState) {
         gameState
-            .chessPiecePositions()
+            .chessPiecePositions
             .forEach(::renderChessPiece)
     }
 
@@ -29,24 +29,24 @@ class ConsoleRenderer {
         val horizontalOffsetWithinSquare = 4
 
         // Rows on board are counted from bottom, but in the buffer from top.
-        val rowFromTop = 8 - position.row()
+        val rowFromTop = 8 - position.row
         val initialEmptyLines = 1
         val line = initialEmptyLines + rowFromTop * squareHeight
         val offsetWithinLine =
-            horizontalOffsetForLabels + (position.column() - 1) * squareWidth + horizontalOffsetWithinSquare
+            horizontalOffsetForLabels + (position.column - 1) * squareWidth + horizontalOffsetWithinSquare
         val charsPerLine = 55
         val index = line * charsPerLine + offsetWithinLine
         renderBuffer[index] = toChar(chessPiece)
     }
 
     private fun toChar(chessPiece: ChessPiece): Char {
-        return when (chessPiece.name()) {
-            ChessPieceName.PAWN -> if (chessPiece.color() === PlayerColor.WHITE) '♙' else '♟'
-            ChessPieceName.ROOK -> if (chessPiece.color() === PlayerColor.WHITE) '♖' else '♜'
-            ChessPieceName.KNIGHT -> if (chessPiece.color() === PlayerColor.WHITE) '♘' else '♞'
-            ChessPieceName.BISHOP -> if (chessPiece.color() === PlayerColor.WHITE) '♗' else '♝'
-            ChessPieceName.QUEEN -> if (chessPiece.color() === PlayerColor.WHITE) '♕' else '♛'
-            ChessPieceName.KING -> if (chessPiece.color() === PlayerColor.WHITE) '♔' else '♚'
+        return when (chessPiece.name) {
+            ChessPieceName.PAWN -> if (chessPiece.color === PlayerColor.WHITE) '♙' else '♟'
+            ChessPieceName.ROOK -> if (chessPiece.color === PlayerColor.WHITE) '♖' else '♜'
+            ChessPieceName.KNIGHT -> if (chessPiece.color === PlayerColor.WHITE) '♘' else '♞'
+            ChessPieceName.BISHOP -> if (chessPiece.color === PlayerColor.WHITE) '♗' else '♝'
+            ChessPieceName.QUEEN -> if (chessPiece.color === PlayerColor.WHITE) '♕' else '♛'
+            ChessPieceName.KING -> if (chessPiece.color === PlayerColor.WHITE) '♔' else '♚'
         }
     }
 
