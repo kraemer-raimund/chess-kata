@@ -6,7 +6,6 @@ import org.chess.domain.PlayerColor
 import org.chess.domain.RuleViolation
 import org.chess.domain.rules.SourcePositionMustNotBeEmpty
 import org.chess.domain.rules.TargetPositionMustNotBeOccupiedByAlly
-import java.util.*
 
 class RuleEngine {
 
@@ -29,13 +28,16 @@ class RuleEngine {
     }
 
     private fun movePiece(move: Move, gameState: GameState): GameState {
-        val chessPiecePositions = HashMap(gameState.chessPiecePositions)
-        val chessPiece = chessPiecePositions[move.from]
+        val chessPiecePositions = gameState.chessPiecePositions.toMutableMap()
+
+        // Assert not null, since a missing chess piece at that position must
+        // have already been caught by a rule.
+        val chessPiece = chessPiecePositions[move.from]!!
+
         chessPiecePositions.remove(move.from)
         chessPiecePositions[move.to] = chessPiece
-        return GameState(
-            chessPiecePositions, nextPlayer(gameState.currentPlayer)
-        )
+
+        return GameState(chessPiecePositions, nextPlayer(gameState.currentPlayer))
     }
 
     private fun nextPlayer(currentPlayer: PlayerColor): PlayerColor {

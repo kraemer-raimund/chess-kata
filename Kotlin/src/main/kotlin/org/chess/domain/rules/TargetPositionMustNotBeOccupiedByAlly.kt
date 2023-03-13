@@ -3,7 +3,6 @@ package org.chess.domain.rules
 import org.chess.domain.GameState
 import org.chess.domain.Move
 import org.chess.domain.RuleViolation
-import java.util.*
 
 class TargetPositionMustNotBeOccupiedByAlly : Rule {
 
@@ -11,11 +10,12 @@ class TargetPositionMustNotBeOccupiedByAlly : Rule {
         val chessPieceAtTargetPosition = gameState
             .chessPiecePositions
             .getOrDefault(move.to, null)
+            ?: return null
 
-        if (chessPieceAtTargetPosition != null && chessPieceAtTargetPosition.color === gameState.currentPlayer) {
-            return RuleViolation.TARGET_POSITION_OCCUPIED_BY_ALLY
+        return if (chessPieceAtTargetPosition.color === gameState.currentPlayer) {
+            RuleViolation.TARGET_POSITION_OCCUPIED_BY_ALLY
+        } else {
+            null
         }
-
-        return null
     }
 }
