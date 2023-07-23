@@ -3,9 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess", "Chess\Chess.csproj", "{2F63C1C0-EBC5-4530-95D7-BFE2954B23D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chess", "Chess\Chess.csproj", "{2F63C1C0-EBC5-4530-95D7-BFE2954B23D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessTests", "ChessTests\ChessTests.csproj", "{A4E172AC-3B28-4E5B-ADFB-2F6C1D8E527A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3D04DB4B-F234-4A7D-BAAD-F21DB2DEFC61}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RenderingTests", "RenderingTests\RenderingTests.csproj", "{A02BCDDB-A887-4A30-8D93-1138BCCB91FA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rendering", "Rendering\Rendering.csproj", "{08F50BE4-5FCA-4114-9260-4B3FC0F0BD85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +24,14 @@ Global
 		{2F63C1C0-EBC5-4530-95D7-BFE2954B23D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F63C1C0-EBC5-4530-95D7-BFE2954B23D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F63C1C0-EBC5-4530-95D7-BFE2954B23D6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A4E172AC-3B28-4E5B-ADFB-2F6C1D8E527A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4E172AC-3B28-4E5B-ADFB-2F6C1D8E527A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4E172AC-3B28-4E5B-ADFB-2F6C1D8E527A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4E172AC-3B28-4E5B-ADFB-2F6C1D8E527A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A02BCDDB-A887-4A30-8D93-1138BCCB91FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A02BCDDB-A887-4A30-8D93-1138BCCB91FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A02BCDDB-A887-4A30-8D93-1138BCCB91FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A02BCDDB-A887-4A30-8D93-1138BCCB91FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08F50BE4-5FCA-4114-9260-4B3FC0F0BD85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08F50BE4-5FCA-4114-9260-4B3FC0F0BD85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08F50BE4-5FCA-4114-9260-4B3FC0F0BD85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08F50BE4-5FCA-4114-9260-4B3FC0F0BD85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
