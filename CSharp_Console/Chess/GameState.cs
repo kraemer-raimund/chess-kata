@@ -7,6 +7,11 @@
             ChessPiecesByPosition = InitialPositions;
         }
 
+        public GameState(IReadOnlyDictionary<Position, ChessPiece> chessPiecesByPosition)
+        {
+            ChessPiecesByPosition = chessPiecesByPosition;
+        }
+
         public IReadOnlyDictionary<Position, ChessPiece> ChessPiecesByPosition { get; }
 
         private static Dictionary<Position, ChessPiece> InitialPositions { get; }
