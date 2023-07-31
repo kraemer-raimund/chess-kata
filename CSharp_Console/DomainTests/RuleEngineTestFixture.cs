@@ -11,7 +11,7 @@ namespace Chess.Domain.Tests
             public void RejectsIllegalMoves()
             {
                 RuleEngine ruleEngine = new();
-                GameState gameStateBefore = new();
+                GameState gameStateBefore = GameState.InitialState();
 
                 /*
                 A guaranteed illegal move (there is no piece at that position, and the target position
@@ -33,7 +33,7 @@ namespace Chess.Domain.Tests
             [Test]
             public void TheSourcePositionMustNotBeEmpty()
             {
-                GameState gameState = new();
+                GameState gameState = GameState.InitialState();
                 SourcePositionMustNotBeEmpty rule = new();
 
                 var move = new Move(new(4, 4), new(4, 4));

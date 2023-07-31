@@ -2,7 +2,7 @@
 {
     public class GameState
     {
-        public GameState()
+        private GameState()
         {
             ChessPiecesByPosition = InitialPositions;
         }
@@ -11,6 +11,10 @@
         {
             ChessPiecesByPosition = chessPiecesByPosition;
         }
+
+        public static GameState WithEmptyBoard() => new(new Dictionary<Position, ChessPiece>());
+
+        public static GameState InitialState() => new();
 
         public IReadOnlyDictionary<Position, ChessPiece> ChessPiecesByPosition { get; }
 

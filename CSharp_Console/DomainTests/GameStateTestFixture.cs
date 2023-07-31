@@ -10,7 +10,8 @@ namespace Chess.Domain.Tests
             [Test]
             public void HasCorrectInitialChessPiecePositions()
             {
-                var actual = new GameState().ChessPiecesByPosition;
+                var initialGameState = GameState.InitialState();
+                var actual = initialGameState.ChessPiecesByPosition;
 
                 var expected = new Dictionary<Position, ChessPiece>()
                 {
