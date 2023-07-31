@@ -1,8 +1,7 @@
 ﻿using Chess.Domain;
-using Chess.Rendering;
 using NUnit.Framework;
 
-namespace ChessTests
+namespace Chess.Rendering.Tests
 {
     [TestFixture]
     internal class ConsoleBoardRendererTestFixture
