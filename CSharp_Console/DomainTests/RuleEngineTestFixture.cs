@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Chess.Domain.Rules;
+using NUnit.Framework;
 
 namespace Chess.Domain.Tests
 {
@@ -24,6 +25,21 @@ namespace Chess.Domain.Tests
 
                 Assert.IsNotEmpty(moveResult.Violations);
                 Assert.AreEqual(gameStateBefore, moveResult.GameState);
+            }
+        }
+
+        internal class AccordingToTheRules
+        {
+            [Test]
+            public void TheSourcePositionMustNotBeEmpty()
+            {
+                GameState gameState = new();
+                SourcePositionMustNotBeEmpty rule = new();
+
+                var move = new Move(new(4, 4), new(4, 4));
+                RuleViolation? ruleViolation = rule.Execute(move, gameState);
+
+                Assert.IsNotNull(ruleViolation);
             }
         }
     }
