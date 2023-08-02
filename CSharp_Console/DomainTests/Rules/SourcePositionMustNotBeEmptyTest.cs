@@ -14,6 +14,7 @@ namespace Chess.Domain.Rules.Tests
             RuleViolation? ruleViolation = rule.Execute(move, gameState);
 
             Assert.IsNotNull(ruleViolation);
+            Assert.AreEqual(RuleViolation.NoPieceAtSourcePosition, ruleViolation!.Value);
         }
 
         [Test]
