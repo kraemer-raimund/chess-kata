@@ -23,20 +23,11 @@ namespace Chess.Platform
             GameState gameState = initialState;
             while (_running)
             {
-                ClearScreen();
                 RenderToScreen(gameState);
-                PromptPlayerInput();
+                PromptPlayerInput(gameState);
                 string playerInput = ReadPlayerInput();
                 gameState = HandlePlayerInput(playerInput, gameState);
             }
-        }
-
-        private void ClearScreen()
-        {
-            Console.WriteLine(
-                "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" +
-                "\n\n\n\n\n\n\n\n\n\n"
-            );
         }
 
         private void RenderToScreen(GameState gameState)
@@ -44,9 +35,21 @@ namespace Chess.Platform
             Console.WriteLine(_renderer.Render(gameState));
         }
 
-        private void PromptPlayerInput()
+        private void PromptPlayerInput(GameState gameState)
         {
-            Console.WriteLine("Type your move in the format \"from -> to\", e.g., \"e2 -> e8\".");
+            string playerName = ToPlayerName(gameState.CurrentPlayer);
+            Console.WriteLine($"{playerName}'s turn.\n");
+            Console.WriteLine("Type your move in the format \"from -> to\", e.g., \"e2 -> e8\".\n");
+        }
+
+        private string ToPlayerName(PlayerColor playerColor)
+        {
+            return playerColor switch
+            {
+                PlayerColor.White => "White",
+                PlayerColor.Black => "Black",
+                _ => throw new ArgumentOutOfRangeException(nameof(playerColor), playerColor, "Unhandled enum value.")
+            };
         }
 
         private string ReadPlayerInput()
@@ -74,7 +77,7 @@ namespace Chess.Platform
             var moveResult = _ruleEngine.Execute(move!.Value, gameState);
             if (moveResult.Violations.Any())
             {
-                Console.WriteLine("Invalid move!");
+                Console.WriteLine("\nInvalid move!\n");
                 return gameState;
             }
 
