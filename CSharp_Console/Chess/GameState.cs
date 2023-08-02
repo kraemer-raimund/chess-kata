@@ -12,11 +12,19 @@
             ChessPiecesByPosition = chessPiecesByPosition;
         }
 
+        public GameState(IReadOnlyDictionary<Position, ChessPiece> chessPiecesByPosition, PlayerColor currentPlayer)
+        {
+            ChessPiecesByPosition = chessPiecesByPosition;
+            CurrentPlayer = currentPlayer;
+        }
+
         public static GameState WithEmptyBoard() => new(new Dictionary<Position, ChessPiece>());
 
         public static GameState InitialState() => new();
 
         public IReadOnlyDictionary<Position, ChessPiece> ChessPiecesByPosition { get; }
+
+        public PlayerColor CurrentPlayer { get; } = PlayerColor.White;
 
         private static Dictionary<Position, ChessPiece> InitialPositions { get; }
             = new Dictionary<Position, ChessPiece>()

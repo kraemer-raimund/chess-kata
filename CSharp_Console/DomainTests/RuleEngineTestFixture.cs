@@ -53,6 +53,29 @@ namespace Chess.Domain.Tests
                 ChessPiece chessPieceBefore = gameStateBefore.ChessPiecesByPosition[positionBefore];
                 Assert.AreEqual(chessPieceBefore, chessPieceAfter);
             }
+
+            [Test]
+            public void TogglesPlayersAfterValidMove()
+            {
+                ChessPiece whitePawn = new(ChessPieceName.Pawn, PlayerColor.White);
+                PlayerColor currentPlayerBefore = PlayerColor.White;
+                Position positionBefore = new(1, 2);
+                Position positionAfter = new(1, 3);
+
+                GameState gameStateBefore = new(
+                    new Dictionary<Position, ChessPiece>()
+                    {
+                        [positionBefore] = whitePawn
+                    },
+                    currentPlayerBefore
+                );
+                Move move = new(positionBefore, positionAfter);
+
+                RuleEngine ruleEngine = new();
+                MoveResult moveResult = ruleEngine.Execute(move, gameStateBefore);
+
+                Assert.AreNotEqual(currentPlayerBefore, moveResult.GameState.CurrentPlayer);
+            }
         }
     }
 }

@@ -43,7 +43,14 @@ namespace Chess.Domain
                 newPositions[move.To] = chessPiece;
             }
 
-            return new GameState(newPositions);
+            return new GameState(newPositions, NextPlayer(gameState.CurrentPlayer));
+        }
+
+        private static PlayerColor NextPlayer(PlayerColor currentPlayer)
+        {
+            return currentPlayer == PlayerColor.White
+                    ? PlayerColor.Black
+                    : PlayerColor.White;
         }
     }
 }
