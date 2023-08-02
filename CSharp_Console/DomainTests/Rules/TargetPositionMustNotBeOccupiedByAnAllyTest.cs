@@ -50,5 +50,26 @@ namespace Chess.Domain.Rules.Tests
 
             Assert.IsNull(ruleViolation);
         }
+
+        [Test]
+        public void AcceptsMoveToEmptyPosition()
+        {
+            Position from = new(3, 3);
+            Position to = new(4, 4);
+            ChessPiece whiteBishopToMove = new(ChessPieceName.Bishop, PlayerColor.White);
+
+            GameState gameState = new(
+                new Dictionary<Position, ChessPiece>()
+                {
+                        { from, whiteBishopToMove }
+                }
+            );
+
+            var rule = new TargetPositionMustNotBeOccupiedByAlly();
+            var move = new Move(from, to);
+            RuleViolation? ruleViolation = rule.Execute(move, gameState);
+
+            Assert.IsNull(ruleViolation);
+        }
     }
 }
