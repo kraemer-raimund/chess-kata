@@ -6,6 +6,8 @@ namespace Chess.Platform
     internal class Engine
     {
         private readonly ConsoleBoardRenderer _renderer = new ConsoleBoardRenderer();
+        private readonly MoveCommandParser _moveCommandParser = new MoveCommandParser();
+        private readonly RuleEngine _ruleEngine = new RuleEngine();
 
         private bool _running = false;
 
@@ -61,13 +63,22 @@ namespace Chess.Platform
             }
         }
 
-        private GameState HandlePlayerInput(String playerInput, GameState gameState)
+        private GameState HandlePlayerInput(string playerInput, GameState gameState)
         {
-            // For now, we do not transform the game state. The game state will
-            // remain the same for any player input. Later we will parse the
-            // player input and transform the game state according to the rules
-            // of chess.
-            return gameState;
+            if (!_moveCommandParser.TryParse(playerInput, out Move? move))
+            {
+                Console.WriteLine("Please make sure your command is in the correct format.");
+                return gameState;
+            }
+
+            var moveResult = _ruleEngine.Execute(move!.Value, gameState);
+            if (moveResult.Violations.Any())
+            {
+                Console.WriteLine("Invalid move!");
+                return gameState;
+            }
+
+            return moveResult.GameState;
         }
     }
 }
